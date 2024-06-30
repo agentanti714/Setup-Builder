@@ -1,0 +1,4 @@
+Credits:
+agentanti: All Python code logic
+Item data from https://docs.google.com/spreadsheets/d/1eXjO4mBnw0fwSm0cuoB2JH_OuS4EtEy32wneVsaCIU8/
+Rebirth time data from stax1547
