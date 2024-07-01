@@ -3,6 +3,7 @@ Setup builder (v1.0.1) for Miner's Haven, by agentanti714. WIP
 
 >[!NOTE]
 >**To use, open Setup.py**
+>Also, try to help me populate items.csv and placements.csv
 
 All portable items are assumed to fit ideally (e.g. angel's always gets x150)
 
