@@ -3,9 +3,6 @@ Setup builder (v1.0.1) for Miner's Haven, by agentanti714. WIP
 
 >[!NOTE]
 >**To use, open Setup.py**
->Also, try to help me populate items.csv and placements.csv
-
-All portable items are assumed to fit ideally (e.g. angel's always gets x150)
 
 >[!WARNING]
 >DO NOT USE COMMAS AS ANYTHING OTHER THAN SEPARATORS/DELIMITERS BETWEEN ENTRIES FOR .csv FILES
@@ -41,7 +38,7 @@ WIP:
 
 Making Setup.setup_generate run faster
 
-Portables items in general
+Portables items in general (All portable items are assumed to fit ideally (e.g. angel's always gets x150))
 
 Built setups assumes that the for items with random multiplier, that the overall setup multiplier follows a normal distribution by the central limit theorem.
 
@@ -54,3 +51,5 @@ INCLUDES:
 DOES NOT INCLUDE:
 
 - The Death Cap (please just put the value you actually get)
+
+Also, try to help me populate items.csv and placements.csv 🙏
