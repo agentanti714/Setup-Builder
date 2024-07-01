@@ -1,11 +1,13 @@
 # Setup-Builder
 Setup builder (v1.0.1) for Miner's Haven, by agentanti714. WIP
 
-**To use, open Setup.py**
+>[!NOTE]
+>**To use, open Setup.py**
 
 All portable items are assumed to fit ideally (e.g. angel's always gets x150)
 
-DO NOT USE COMMAS AS ANYTHING OTHER THAN SEPARATORS/DELIMITERS BETWEEN ENTRIES FOR .csv FILES
+>[!WARNING]
+>DO NOT USE COMMAS AS ANYTHING OTHER THAN SEPARATORS/DELIMITERS BETWEEN ENTRIES FOR .csv FILES
 
 --------------------------------------------------
 **items.csv**
