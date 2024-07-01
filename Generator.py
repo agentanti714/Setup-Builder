@@ -223,7 +223,8 @@ def is_valid_placement(item_dict: Dict, item: Dict, x_coord: int, line_lengths: 
 		(x_coord not in item['Placements_any_line']): #item has no valid placement on line 
 		return False
 	else:
-		over_best = 1
+		# Fast, cheap check if item is worth placing
+		over_best = 1 #higher bound of the best case scenario
 		length = sum(line_lengths) - item['Length']
 		for i in item_dict.values():
 			over_best *= i['Multi']
@@ -231,6 +232,7 @@ def is_valid_placement(item_dict: Dict, item: Dict, x_coord: int, line_lengths: 
 			if length <= 0:
 				break
 		
+		# If the product of the item's multiplier and the best case scenario is less than the current best, skip
 		if product * item['Multi'] * over_best <= result_multi:
 			return False
 		elif length == 0:
@@ -284,7 +286,7 @@ def union_dicts(dict1, dict2) -> Dict:
 
 def main():
 	item_dict, portables_dict, line_lengths = load_csv()
-	line_lengths = [5,5]
+	line_lengths = [10,10]
 	result = setup_generate(item_dict, line_lengths)
 	print(result)
 

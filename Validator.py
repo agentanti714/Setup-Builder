@@ -26,7 +26,7 @@ def collision(setup: List, item_dict: Dict) -> bool:
 	for i in range(len(setup)-1):
 		if setup[i][3] != setup[i+1][3]:
 			continue
-		if setup[i][2] + item_dict[setup[i][0]]['Length'] > setup[i+1][1]:
+		if setup[i][1] + item_dict[setup[i][0]]['Length'] > setup[i+1][1]:
 			return False
 	return True
 
@@ -139,7 +139,7 @@ def xy_valid(setup: List, item_dict: dict) -> bool:
 	return True
 
 if __name__ == '__main__':
-	setup = [['Sideways Big Bertha', 1, 1, 1], ["Green Tea Latte + Reaper's Fortress", 3, 1, 1], ["Draedon's Gauntlet (instant)", 1, 1, 2], ['Eggcelent Upgrader', 5, 4, 2]]
+	setup = [["Draedon's Gauntlet (instant)", 1, 1, 1], ['Ore Indoctrinator+virt gear', 5, 1, 1], ['Big Fungus+Virtual Gearwork', 1, 3, 2], ['Eggcelent Upgrader', 7, 1, 2], ["Green Tea Latte + Reaper's Fortress", 8, 4, 2]]
 	import Setup
 	item_dict, portables_dict, line_lengths = Setup.load_csv()
 	print(is_valid_setup(setup, item_dict, line_lengths)) #False
