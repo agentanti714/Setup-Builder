@@ -1,5 +1,7 @@
 # Setup-Builder
-Setup builder (v1.0.1) for Miner's Haven, by agentanti714. WIP
+Setup builder (v1.1.0) for Miner's Haven, by agentanti714. WIP
+
+CURRENTLY DOING: website for this thing
 
 >[!NOTE]
 >**To use, open Setup.py**
