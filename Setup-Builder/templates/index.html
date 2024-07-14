@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Setup-Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        h2 {
+            margin-top: 30px;
+        }
+        
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Setup-Builder</h1>
+    <table style="margin-left: 50px;">
+        <tr>
+            <td>Enter the list of items you want to add to the setup:</td>
+        </tr>
+        <tr>
+            <td><textarea id="items" placeholder="List of items"></textarea></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Enter the lengths of your setup:</td>
+        </tr>
+        <tr>
+            <td><textarea id="lengths" placeholder="Lengths"></textarea></td>
+        </tr>
+        <tr>
+            <td><button id="build">Build</button></td>
+        </tr>
+    </table>
+</body>
+</html>
