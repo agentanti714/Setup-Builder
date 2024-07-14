@@ -7,7 +7,7 @@ from itertools import product
 
 def main(args: list) -> int:
     items = dataLoad()
-    #assume that it takes a normal distribution on a log scale by central limit theorem
+    #assume that it takes a normal distribution on a log scale by Central Limit Theorem
     #var(log10(product(x_i))) --> var(sum(log10(x_i)))
     #it is to adjust for it being a multiplier instead of additions
     for i, item in enumerate(items):
