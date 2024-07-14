@@ -36,13 +36,13 @@ def build_setup(): #TODO: finish buildSetup
 
 def load_csv() -> List:
 	"""Loads the csv files and returns a list of dicts."""
-	with open("items.csv", "r", newline='') as upgraders:
+	with open(r"Setup-Builder\items.csv", "r", newline='') as upgraders:
 		reader = csv.DictReader(upgraders, fieldnames=['Name', 'Multi', 'Length', 'Width', 'Placements_1st_line', 'Placements_any_line'])
 		_ = {row["Name"]: parse_items_csv_row(row) for row in reader}
 		sorted_items = sorted(_.items(), key=lambda kv: (kv[1]['Multi']**(1/kv[1]['Length'])), reverse=True)
 		item_dict = {item[0]: item[1] for item in sorted_items} #item_dict is a dict of dicts
 
-	with open('placements.csv', 'r', newline='') as placements:
+	with open(r"Setup-Builder\placements.csv", 'r', newline='') as placements:
 		reader = csv.DictReader(placements, fieldnames=['Name', 'x', 'y', '1st_or_any_line'])
 		while (row := next(reader, None)) is not None:
 			if row['x'] == '*' and row['y'] == '*':
@@ -72,11 +72,11 @@ def load_csv() -> List:
 			else:
 				raise ValueError("Invalid placement type. Must be '1st' or 'Any'.")
 
-	with open("portables.csv", "r", newline='') as portables:
+	with open(r"Setup-Builder\portables.csv", "r", newline='') as portables:
 		reader = csv.DictReader(portables, fieldnames=['Name', 'Multi'])
 		portables_dict: Dict = {row["Name"]: parse_portables_csv_row(row) for row in reader} #portables_dict is a dict of dicts
 	
-	with open("line_lengths.txt", "r") as file:
+	with open(r"Setup-Builder\line_lengths.txt", "r") as file:
 		line_lengths: tuple = list(map(int, file.readline().split(','))) #line_lengths is a tuple of integers
 	
 	return item_dict, portables_dict, line_lengths

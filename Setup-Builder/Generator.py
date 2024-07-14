@@ -17,69 +17,6 @@ def timing(f): #taken from stackoverflow
 		return result
 	return wrap
 
-def load_csv() -> List[Dict]:
-	with open("items.csv", "r", newline='') as upgraders:
-		reader = csv.DictReader(upgraders, fieldnames=['Name', 'Multi', 'Length', 'Width', 'Placements_1st_line', 'Placements_any_line'])
-		_ = {row["Name"]: parse_items_csv_row(row) for row in reader}
-		sorted_items = sorted(_.items(), key=lambda kv: (kv[1]['Multi']**(1/kv[1]['Length'])), reverse=True)
-		item_dict: Dict = {item[0]: item[1] for item in sorted_items} #item_dict is a dict of dicts
-
-	with open('placements.csv', 'r', newline='') as placements:
-		reader = csv.DictReader(placements, fieldnames=['Name', 'x', 'y', '1st_or_any_line'])
-		while (row := next(reader, None)) is not None:
-			if row['x'] == '*' and row['y'] == '*':
-				if row['1st_or_any_line'] == '1st':
-					for i in range(1,57):
-						item_dict[row['Name']]['Placements_1st_line'][i] = [1,2,3,4]
-				elif row['1st_or_any_line'] == 'Any':
-					for i in range(1,57):
-						item_dict[row['Name']]['Placements_any_line'][i] = [1,2,3,4]
-				else:
-					raise ValueError("Invalid placement type. Must be '1st' or 'Any'.")
-				continue
-			
-			row['x'] = int(row['x'])
-			row['y'] = int(row['y'])
-			
-			if row['1st_or_any_line'] == '1st':
-				if row['x'] in item_dict[row['Name']]['Placements_1st_line']:
-					item_dict[row['Name']]['Placements_1st_line'][row['x']].append(row['y'])
-				else:
-					item_dict[row['Name']]['Placements_1st_line'][row['x']] = [row['y']]
-			elif row['1st_or_any_line'] == 'Any':
-				if row['x'] in item_dict[row['Name']]['Placements_any_line']:
-					item_dict[row['Name']]['Placements_any_line'][row['x']].append(row['y'])
-				else:
-					item_dict[row['Name']]['Placements_any_line'][row['x']] = [row['y']]
-			else:
-				raise ValueError("Invalid placement type. Must be '1st' or 'Any'.")
-
-	with open("portables.csv", "r", newline='') as portables:
-		reader = csv.DictReader(portables, fieldnames=['Name', 'Multi'])
-		portables_dict: dict = {row["Name"]: parse_portables_csv_row(row) for row in reader} #portables_dict is a dict of dicts
-	
-	with open("line_lengths.txt", "r") as settings:
-		line_lengths: list = list(map(int, settings.readline().split(','))) #line_lengths is a tuple of integers
-	
-	return item_dict, portables_dict, line_lengths
-
-def parse_items_csv_row(row: dict) -> dict: 
-	"""Reads a row from items.csv and returns a dict with NAME: {NAME: <NAME>, MULTI: <MULTI>, LENGTH: <LENGTH>, ...}. 
-	'*' is used to skip validation checks for some items."""
-	row['Multi'] = float(row['Multi'])
-	row['Length'] = int(row['Length'])
-	row['Width'] = int(row['Width']) if row['Width'] != '*' else '*'
-	row['Placements_1st_line'] = {} #Dict[int: list]
-	row['Placements_any_line'] = {} #Dict[int: list]
-	return row
-
-def parse_portables_csv_row(row: dict) -> dict:
-	"""Reads a row from portables.csv and returns a dict with NAME: {NAME: <NAME>, MULTI: <MULTI>}. """
-	if any([row[['Name', 'Multi'][i]] == '*' for i in [0, 1]]):
-		raise ValueError("'Name', 'Multi' cannot skip validation checks using '*' option.")
-	row['Multi'] = float(row['Multi'])
-	return row
-
 @timing
 def setup_generate(item_dict: Dict, line_lengths: List[int]) -> List[List]: #List of [name, x, y, line_no]
 	'''Recursively generates a setup of upgraders with the highest possible multiplier.
@@ -285,7 +222,8 @@ def union_dicts(dict1, dict2) -> Dict:
 	return result
 
 def main():
-	item_dict, portables_dict, line_lengths = load_csv()
+	import Setup
+	item_dict, portables_dict, line_lengths = Setup.load_csv()
 	line_lengths = [10,10]
 	result = setup_generate(item_dict, line_lengths)
 	print(result)
